@@ -13,6 +13,31 @@ function collapse(level) {
     $(".level-" + level).attr("open", false);
 }
 
+function filter(inp) {
+    var s = inp.val();
+    console.log(s);
+    if (!s) {
+        $("details > summary").show();
+        return;
+    }
+        
+    $("details > summary").filter(function (i, el) {
+        //console.log(i, el);
+        var t = $(el).find(".region-label").text().toLowerCase();
+        return t.indexOf(s.toLowerCase()) < 0;
+    }).hide();
+}
+
+// A $( document ).ready() block.
+$(document).ready(function() {
+    var el = $('#search');
+    el.on('input', function(e){
+        filter(el);
+    });
+})
+
+
+
     </script>
     <style>
     
@@ -35,6 +60,7 @@ function collapse(level) {
     <li>Required improvements: find a smarter algorithm for generating visually distinct color variations.</li>
     </ul>
     </div>
+    <div style="margin: 20px;"><input id="search" type="text" placeholder="search"></div>
     <div style="margin: 20px;">
     <button onclick="collapse(2);">Collapse to L2</button>
     <button onclick="collapse(3);">Collapse to L3</button>
