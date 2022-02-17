@@ -385,7 +385,14 @@ def generate_html(ids, recursive=False, restrict_to_beryl=False, max_level=10, c
 
 if __name__ == '__main__':
     custom = custom_gradient()
+
     write_json("docs/custom_gradient.json", custom)
     write_html(
-        "docs/index.html",
+        "docs/custom_gradient.html",
+        generate_html(root, recursive=True, custom=custom, max_level=7))
+
+    custom = custom_variants()
+    write_json("docs/custom_variants.json", custom)
+    write_html(
+        "docs/custom_variants.html",
         generate_html(root, recursive=True, custom=custom, max_level=7))
