@@ -20,7 +20,7 @@ function filter(inp) {
         $("details > summary").show();
         return;
     }
-        
+
     $("details > summary").filter(function (i, el) {
         //console.log(i, el);
         var t = $(el).find(".region-label").text().toLowerCase();
@@ -35,7 +35,6 @@ $(document).ready(function() {
         filter(el);
     });
 })
-
 
 
     </script>
