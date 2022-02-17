@@ -1,12 +1,9 @@
 # Imports.
 
+import json
 import numpy as np
-from IPython.core.display import display, HTML
-from ipywidgets import interact
 import matplotlib.pyplot as plt
 from matplotlib import colors as mcolors
-import colorio
-from colorio.cs import ColorCoordinates, HSV, OKLAB, SRGB1, XYZ100
 
 from ibllib.atlas.regions import BrainRegions, FILE_BERYL
 
@@ -159,6 +156,12 @@ def lines(rgb):
 def write_html(path, contents):
     with open(path, "w") as f:
         f.write(html % contents)
+
+
+def write_json(path, custom):
+    d = {int(key): float_to_rgb8(val) for key, val in custom.items()}
+    with open(path, 'w') as f:
+        json.dump(d, f, indent=1, sort_keys=True)
 
 
 # Functions.
@@ -381,6 +384,8 @@ def generate_html(ids, recursive=False, restrict_to_beryl=False, max_level=10, c
 
 
 if __name__ == '__main__':
+    custom = custom_gradient()
+    write_json("docs/custom_gradient.json", custom)
     write_html(
         "docs/index.html",
-        generate_html(root, recursive=True, custom=custom_gradient(), max_level=7))
+        generate_html(root, recursive=True, custom=custom, max_level=7))
